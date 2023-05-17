@@ -73,7 +73,7 @@ const Navbar = ({ handleCitiesData }) => {
       } else if (responseBody.warnings?.[0].code === 1797) {
         //Si data.warnings n'existe pas, la condition ne sera simplement pas satisfaite et le code continuera de s'exécuter sans erreur.Sinon tu te prends un data.warnings is undefined
         console.log("Aucune ville trouvée");
-        handleCitiesData(["Aucune ville trouvée"]);
+        handleCitiesData(undefined);
       }
     } catch (error) {
       console.error(error.message);
