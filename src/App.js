@@ -4,11 +4,13 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import CityPage from "./pages/CityPage";
+import LocalStorageDisplay from "./components/LocalStorageDisplay";
 
 import "./App.css";
 
 function App() {
   const [citiesData, setcitiesData] = useState([]);
+  const [localStorageIndex, setLocalStorageIndex] = useState(0);
 
   const location = useLocation();
   const isCityRoute = location.pathname.includes("city");
@@ -29,11 +31,24 @@ function App() {
           </button>
         </div>
       ) : (
-        <Navbar handleCitiesData={handleCitiesData} />
+        <>
+          <Navbar handleCitiesData={handleCitiesData} />
+          <LocalStorageDisplay />
+          <div>________________________________</div>
+        </>
       )}
 
       <Routes>
-        <Route path="/" element={<Home citiesData={citiesData} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              citiesData={citiesData}
+              localStorageIndex={localStorageIndex}
+              setLocalStorageIndex={setLocalStorageIndex}
+            />
+          }
+        />
         <Route
           path="city/:citySlug"
           element={<CityPage citiesData={citiesData} />}
