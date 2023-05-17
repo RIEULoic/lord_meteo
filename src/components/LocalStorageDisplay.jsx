@@ -4,9 +4,7 @@ const LocalStorageDisplay = () => {
   const citiesSavedOnLocalStorage = [];
   for (let i = 1; i <= localStorage.length; i++) {
     citiesSavedOnLocalStorage.push(JSON.parse(localStorage.getItem(i)));
-    //console.log(citiesSavedOnLocalStorage);
   }
-  console.log(citiesSavedOnLocalStorage);
 
   return (
     <>

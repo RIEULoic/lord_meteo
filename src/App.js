@@ -11,7 +11,6 @@ import "./App.css";
 function App() {
   const [citiesData, setCitiesData] = useState([]);
   const [localStorageIndex, setLocalStorageIndex] = useState(0);
-  //const [localStorageData, setLocalStorageData] = useState([]);
   const [resetCitiesData, setResetCitiesData] = useState(false);
 
   console.log(`citiesData : ${JSON.stringify(citiesData, null, 2)}`);
@@ -23,7 +22,7 @@ function App() {
   //useParams ne fonctionne que dans les composants qui sont dans une Route. Ici, on est dans App(pas de Route), donc on utilise useLocation.
 
   useEffect(() => {
-    // Retrieve data from localStorage
+    //Récupère les données du localStorage
     const storedCitiesData = [];
     for (let i = 1; i <= 5; i++) {
       const cityData = localStorage.getItem(i);
@@ -32,16 +31,14 @@ function App() {
       }
     }
 
-    // Set the state with the retrieved data
     setCitiesData(storedCitiesData);
-  }, [resetCitiesData]); // Empty dependency array means this effect runs once on mount
+  }, [resetCitiesData]);
 
   function handleCitiesData(data) {
-    //setCitiesData((prevCitiesData) => [...prevCitiesData, ...data]);
     setCitiesData(data);
   }
 
-  function handleResetCitiesData(params) {
+  function handleResetCitiesData() {
     setResetCitiesData(!resetCitiesData);
   }
 
@@ -70,8 +67,6 @@ function App() {
               citiesData={citiesData}
               localStorageIndex={localStorageIndex}
               setLocalStorageIndex={setLocalStorageIndex}
-              resetCitiesData={resetCitiesData}
-              setResetCitiesData={setResetCitiesData}
             />
           }
         />

@@ -1,13 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
-const Home = ({
-  citiesData,
-  localStorageIndex,
-  setLocalStorageIndex,
-  resetCitiesData,
-  setResetCitiesData,
-}) => {
+const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
   console.log(citiesData);
 
   function handleSaveLocalStorage(cityData) {
@@ -20,6 +13,7 @@ const Home = ({
         latitude: cityData.geoCode.latitude,
         longitude: cityData.geoCode.longitude,
       },
+      //Je sauvegarde les datas avec la même structure JSON que dans le composant LocalStorageDisplay.
     };
 
     localStorage.setItem(cityToSave.cityIndex, JSON.stringify(cityToSave));
@@ -42,6 +36,7 @@ const Home = ({
               const storedCity = JSON.parse(localStorage.getItem(i));
               if (storedCity && storedCity.name === city.name) {
                 cityInLocalStorage = true;
+                //Si la ville est déjà dans le localStorage(cityInLocalStorage = true), on ne l'affiche pas (return cityInLocalStorage ? null : (<button......</button>))
               }
             }
             return cityInLocalStorage ? null : (
