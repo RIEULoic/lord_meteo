@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 const Navbar = ({ handleCitiesData }) => {
   const [accessToken, setAccessToken] = useState("");
   const [searchInput, setsearchInput] = useState("");
-  // const [citiesData, setcitiesData] = useState([]);
 
   useEffect(() => {
     requestNewAccessToken();
@@ -94,23 +93,6 @@ const Navbar = ({ handleCitiesData }) => {
           onChange={handleInputChange}
         />
       </div>
-      {/* {console.log(citiesData)}
-      {citiesData.map((city) => (
-        <h1
-          key={
-            city.geoCodelatitude !== undefined ||
-            city.geoCode.longitude !== undefined
-              ? `${city.geoCode.latitude}${city.geoCode.longitude}`
-              : `${Math.random()}`
-          }
-        >
-          {city.name}
-        </h1>
-      ))}
-      {/* Tu peux aussi l'écrire avec un return explicite en rajoutant des accolades: 
-      {citiesData.map((city) => {
-        return <h1 key={city.iataCode}>{city.name}</h1>;
-      })} */}
     </nav>
   );
 };

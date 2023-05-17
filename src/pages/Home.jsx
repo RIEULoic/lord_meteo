@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Home = ({ citiesData }) => {
   console.log(citiesData);
 
@@ -6,7 +8,7 @@ const Home = ({ citiesData }) => {
       <h1>Home</h1>
       <div>
         {citiesData.map((city) => (
-          <h1
+          <button
             key={
               city.geoCode.latitude !== undefined ||
               city.geoCode.longitude !== undefined
@@ -14,8 +16,10 @@ const Home = ({ citiesData }) => {
                 : `${Math.random()}`
             }
           >
-            {city.name}
-          </h1>
+            <Link to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}>
+              {city.name}
+            </Link>
+          </button>
         ))}
       </div>
     </div>
