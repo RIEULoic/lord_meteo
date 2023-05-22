@@ -4,9 +4,7 @@ const LocalStorageDisplay = () => {
   const citiesSavedOnLocalStorage = [];
   for (let i = 1; i <= localStorage.length; i++) {
     citiesSavedOnLocalStorage.push(JSON.parse(localStorage.getItem(i)));
-    //console.log(citiesSavedOnLocalStorage);
   }
-  console.log(citiesSavedOnLocalStorage);
 
   return (
     <>
@@ -15,15 +13,11 @@ const LocalStorageDisplay = () => {
         {citiesSavedOnLocalStorage.map((city) => {
           console.log(city.cityIndex);
           return (
-            <>
-              <button key={city.cityIndex}>
-                <Link
-                  to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}
-                >
-                  <h1>{city.name}</h1>
-                </Link>
-              </button>
-            </>
+            <button key={city.cityIndex}>
+              <Link to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}>
+                <h1>{city.name}</h1>
+              </Link>
+            </button>
           );
         })}
       </div>
