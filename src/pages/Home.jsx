@@ -39,7 +39,9 @@ const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
                 //Si la ville est déjà dans le localStorage(cityInLocalStorage = true), on ne l'affiche pas (return cityInLocalStorage ? null : (<button......</button>))
               }
             }
-            return cityInLocalStorage ? null : (
+            return cityInLocalStorage ||
+              !city.geoCode.latitude ||
+              !city.geoCode.longitude ? null : (
               <button
                 key={
                   city.geoCode?.latitude !== undefined ||
@@ -55,7 +57,8 @@ const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
                 <Link
                   to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}
                 >
-                  {city.name}
+                  `Nom : {city.name} Longitude : {city.geoCode.longitude}{" "}
+                  Latitude : {city.geoCode.latitude}`
                 </Link>
               </button>
             );

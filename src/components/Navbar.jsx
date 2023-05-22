@@ -57,7 +57,6 @@ const Navbar = ({ handleCitiesData }) => {
         }
       );
       const responseBody = await response.json();
-      //console.log(data);
       if (responseBody.data) {
         responseBody.data.forEach((city) => {
           console.log(city.name);

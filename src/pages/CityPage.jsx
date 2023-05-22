@@ -9,7 +9,10 @@ const CityPage = ({ citiesData }) => {
   useEffect(() => {
     console.log(citiesData);
     const city = citiesData.find(
-      (city) => city.name.toLowerCase().replace(/\s/g, "") === citySlug
+      (city) =>
+        city.name.toLowerCase().replace(/\s/g, "") === citySlug &&
+        !city.geoCode.latitude === false &&
+        !city.geoCode.longitude === false
     );
     setCurrentCity(city);
     console.log(city);

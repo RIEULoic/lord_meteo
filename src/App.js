@@ -14,7 +14,7 @@ function App() {
   const [resetCitiesData, setResetCitiesData] = useState(false);
 
   console.log(`citiesData : ${JSON.stringify(citiesData, null, 2)}`);
-  console.log(`citiesData : ${citiesData}`);
+  //console.log(`citiesData : ${citiesData}`);
 
   const location = useLocation();
   const isCityRoute = location.pathname.includes("city");
