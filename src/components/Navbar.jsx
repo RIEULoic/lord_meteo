@@ -12,6 +12,9 @@ const Navbar = ({ handleCitiesData }) => {
     if (searchInput.length >= 3) {
       fetchcitiesData();
     } else {
+      /**********À FAIRE **************
+       *  Mettre en place un debouncing pour éviter des requêtes à l'API alors que l'utilisateur n'a pas fini de taper sa recherche.
+       */
       handleCitiesData([]);
     }
   }, [searchInput]);

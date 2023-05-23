@@ -10,7 +10,9 @@ import "./App.css";
 
 function App() {
   const [citiesData, setCitiesData] = useState([]);
-  const [localStorageIndex, setLocalStorageIndex] = useState(0);
+  const [localStorageIndex, setLocalStorageIndex] = useState(
+    localStorage.length
+  );
   const [resetCitiesData, setResetCitiesData] = useState(false);
 
   console.log(`citiesData : ${JSON.stringify(citiesData, null, 2)}`);

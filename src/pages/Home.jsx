@@ -8,6 +8,9 @@ const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
     const cityToSave = {
       cityIndex: (localStorageIndex % 5) + 1,
       //Le modulo du cul permet que l'index ne dépasse pas 5. Si l'index dépasse 5, on revient à 1.
+
+      //**************À FAIRE ******************//
+      //C'est pas dingue comme methode, à partir de 5 villes, c'est le bordel. Il faudrait plutôt supprimer la ville la plus ancienne du localStorage, donc rajouter une propriété date à cityToSave et comparer les dates des villes du localStorage pour supprimer la plus ancienne.
       name: cityData.name,
       geoCode: {
         latitude: cityData.geoCode.latitude,
