@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const CityPage = ({ citiesData }) => {
+const CityPage = ({ citiesData, handleForecastButton }) => {
   const { citySlug } = useParams();
   const [currentCity, setCurrentCity] = useState("");
   const [weatherData, setWeatherData] = useState("");
@@ -63,67 +63,53 @@ const CityPage = ({ citiesData }) => {
               alt={weatherData.current.weather[0].description}
             />
             <h2>Temperature : {weatherData.current.temp} ° Celsius</h2>
+            <button onClick={() => handleForecastButton(currentCity.name)}>
+              {console.log(weatherData.current.temp)}
+              <Link
+                to={`/city/${currentCity.name
+                  .toLowerCase()
+                  .replace(/\s/g, "")}/forecast/${
+                  currentCity.geoCode.latitude
+                }_${currentCity.geoCode.longitude}`}
+              >
+                Prévisions de la journée
+              </Link>
+            </button>
           </div>
 
           <div>_____________________________________</div>
           <h1>Prévisions météo pour les 5 prochains jours :</h1>
-          <div>
-            <div>
-              <h3>J + 1 : {weatherData.daily[1].weather[0].description}</h3>
-              <img
-                src={`https:openweathermap.org/img/wn/${weatherData.daily[1].weather[0].icon}@2x.png`}
-                alt={weatherData.daily[1].weather[0].description}
-              />
-              <div>
-                <h4>min : {weatherData.daily[1].temp.min} °</h4>
-                <h4>max : {weatherData.daily[1].temp.max} °</h4>
+          {
+            //slice permet de selectionner les  5 jours suivants et ensuite on map sur ces 5 jours
+            weatherData.daily.slice(1, 6).map((day, index) => (
+              <div key={index}>
+                <h3>
+                  J + {index + 1} : {day.weather[0].description}
+                </h3>
+                <img
+                  src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                  alt={day.weather[0].description}
+                />
+                <div>
+                  <h4>min : {day.temp.min} °</h4>
+                  <h4>max : {day.temp.max} °</h4>
+                </div>
+                <button onClick={() => handleForecastButton(currentCity.name)}>
+                  {console.log(weatherData.current.temp)}
+                  <Link
+                    city={currentCity.name}
+                    to={`/city/${currentCity.name
+                      .toLowerCase()
+                      .replace(/\s/g, "")}/forecast/${
+                      currentCity.geoCode.latitude
+                    }_${currentCity.geoCode.longitude}/${index + 1}`}
+                  >
+                    Plus d'infos sur la journée
+                  </Link>
+                </button>
               </div>
-            </div>
-            <div>
-              <h3>J + 2 : {weatherData.daily[2].weather[0].description}</h3>
-              <img
-                src={`https:openweathermap.org/img/wn/${weatherData.daily[2].weather[0].icon}@2x.png`}
-                alt={weatherData.daily[2].weather[0].description}
-              />
-              <div>
-                <h4>min : {weatherData.daily[2].temp.min} °</h4>
-                <h4>max : {weatherData.daily[2].temp.max} °</h4>
-              </div>
-            </div>
-            <div>
-              <h3>J + 3 : {weatherData.daily[3].weather[0].description}</h3>
-              <img
-                src={`https:openweathermap.org/img/wn/${weatherData.daily[3].weather[0].icon}@2x.png`}
-                alt={weatherData.daily[3].weather[0].description}
-              />
-              <div>
-                <h4>min : {weatherData.daily[3].temp.min} °</h4>
-                <h4>max : {weatherData.daily[3].temp.max} °</h4>
-              </div>
-            </div>
-            <div>
-              <h3>J + 4 : {weatherData.daily[4].weather[0].description}</h3>
-              <img
-                src={`https:openweathermap.org/img/wn/${weatherData.daily[4].weather[0].icon}@2x.png`}
-                alt={weatherData.daily[4].weather[0].description}
-              />
-              <div>
-                <h4>min : {weatherData.daily[4].temp.min} °</h4>
-                <h4>max : {weatherData.daily[4].temp.max} °</h4>
-              </div>
-            </div>
-            <div>
-              <h3>J + 5 : {weatherData.daily[5].weather[0].description}</h3>
-              <img
-                src={`https:openweathermap.org/img/wn/${weatherData.daily[5].weather[0].icon}@2x.png`}
-                alt={weatherData.daily[5].weather[0].description}
-              />
-              <div>
-                <h4>min : {weatherData.daily[5].temp.min} °</h4>
-                <h4>max : {weatherData.daily[5].temp.max} °</h4>
-              </div>
-            </div>
-          </div>
+            ))
+          }
         </div>
       ) : (
         <div>Chargement...</div>

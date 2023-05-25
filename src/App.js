@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import CityPage from "./pages/CityPage";
 import LocalStorageDisplay from "./components/LocalStorageDisplay";
+import Forecast from "./pages/Forecast";
 
 import "./App.css";
 
@@ -14,6 +15,7 @@ function App() {
     localStorage.length
   );
   const [resetCitiesData, setResetCitiesData] = useState(false);
+  const [cityName, setCityName] = useState("");
 
   console.log(`citiesData : ${JSON.stringify(citiesData, null, 2)}`);
   //console.log(`citiesData : ${citiesData}`);
@@ -22,6 +24,7 @@ function App() {
   const isCityRoute = location.pathname.includes("city");
   //useLocation permet de récupérer l'URL actuelle. Ici, on vérifie si l'URL contient "city" pour afficher le bouton "Revenir à l'accueil" ou non.
   //useParams ne fonctionne que dans les composants qui sont dans une Route. Ici, on est dans App(pas de Route), donc on utilise useLocation.
+  const isForecastRoute = location.pathname.includes("forecast");
 
   useEffect(() => {
     //Récupère les données du localStorage
@@ -44,13 +47,18 @@ function App() {
     setResetCitiesData(!resetCitiesData);
   }
 
+  function handleForecastButton(city) {
+    setCityName(city);
+  }
+
   return (
     <div className="App">
       <h1>Lord Meteo</h1>
       {isCityRoute ? (
         <div>
+          {console.log(isForecastRoute)}
           <button onClick={handleResetCitiesData}>
-            <Link to="/">Revenir à l'accueil</Link>
+            <Link to="/">Revenir l'accueil</Link>
           </button>
         </div>
       ) : (
@@ -74,7 +82,18 @@ function App() {
         />
         <Route
           path="city/:citySlug"
-          element={<CityPage citiesData={citiesData} />}
+          element={
+            <CityPage
+              citiesData={citiesData}
+              handleForecastButton={handleForecastButton}
+            />
+          }
+        />
+
+        <Route
+          path="city/:citySlug/forecast/:forecastSlug/:daySlug?"
+          //:daySlug? signifie que le paramètre est optionnel
+          element={<Forecast city={cityName} />}
         />
       </Routes>
     </div>
