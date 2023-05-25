@@ -16,7 +16,7 @@ const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
         latitude: cityData.geoCode.latitude,
         longitude: cityData.geoCode.longitude,
       },
-      //Je sauvegarde les datas avec la même structure JSON que dans le composant LocalStorageDisplay.
+      //Je sauvegarde les datas avec la même structure JSON que dans la réponse API
     };
 
     localStorage.setItem(cityToSave.cityIndex, JSON.stringify(cityToSave));
@@ -60,8 +60,7 @@ const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
                 <Link
                   to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}
                 >
-                  `Nom : {city.name} Longitude : {city.geoCode.longitude}{" "}
-                  Latitude : {city.geoCode.latitude}`
+                  {city.name}
                 </Link>
               </button>
             );
