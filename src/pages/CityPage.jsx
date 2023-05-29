@@ -2,14 +2,15 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const CityPage = ({ citiesData, handleForecastButton }) => {
-  const { citySlug } = useParams();
-  const [currentCity, setCurrentCity] = useState("");
+  const { citySlug, forecastSlug } = useParams();
+  const [currentCity, setCurrentCity] = useState(null);
   const [weatherData, setWeatherData] = useState("");
   const [currentDate, setCurrentDate] = useState("");
   let date = "";
 
   useEffect(() => {
     console.log(citiesData);
+    //console.log(forecastSlug);
     const city = citiesData.find(
       (city) =>
         city.name.toLowerCase().replace(/\s/g, "") === citySlug &&
@@ -18,13 +19,13 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
     );
     setCurrentCity(city);
     console.log(city);
-  }, [citySlug]);
+  }, [citySlug, forecastSlug]);
 
   useEffect(() => {
-    if (currentCity.geoCode) {
+    if (currentCity && currentCity.geoCode) {
       fetchOpenWeatherMap();
     }
-  }, [currentCity]);
+  }, [currentCity, forecastSlug]);
 
   async function fetchOpenWeatherMap() {
     try {
@@ -48,7 +49,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
 
   return (
     <div>
-      {currentCity.geoCode && weatherData.current ? (
+      {currentCity && currentCity.geoCode && weatherData.current ? (
         <div>
           <h1>City: {currentCity.name}</h1>
           <h2>Latitude : {currentCity.geoCode.latitude}</h2>
@@ -63,7 +64,15 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
               alt={weatherData.current.weather[0].description}
             />
             <h2>Temperature : {weatherData.current.temp} ° Celsius</h2>
-            <button onClick={() => handleForecastButton(currentCity.name)}>
+            <button
+              onClick={() =>
+                handleForecastButton(
+                  currentCity.name,
+                  currentCity.geoCode.latitude,
+                  currentCity.geoCode.longitude
+                )
+              }
+            >
               {console.log(weatherData.current.temp)}
               <Link
                 to={`/city/${currentCity.name
@@ -94,7 +103,15 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
                   <h4>min : {day.temp.min} °</h4>
                   <h4>max : {day.temp.max} °</h4>
                 </div>
-                <button onClick={() => handleForecastButton(currentCity.name)}>
+                <button
+                  onClick={() =>
+                    handleForecastButton(
+                      currentCity.name,
+                      currentCity.geoCode.latitude,
+                      currentCity.geoCode.longitude
+                    )
+                  }
+                >
                   {console.log(weatherData.current.temp)}
                   <Link
                     city={currentCity.name}

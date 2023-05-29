@@ -45,10 +45,23 @@ function App() {
 
   function handleResetCitiesData() {
     setResetCitiesData(!resetCitiesData);
+    if (localStorage.getItem("temporaryCity") !== null && !isForecastRoute) {
+      localStorage.removeItem("temporaryCity");
+    }
   }
 
-  function handleForecastButton(city) {
-    setCityName(city);
+  function handleForecastButton(cityName, latitude, longitude) {
+    setCityName(cityName);
+    const cityLinkedForecast = {
+      cityIndex: "temporaryCity",
+      url: `/city/${cityName.toLowerCase().replace(/\s/g, "")}`,
+    };
+
+    localStorage.setItem(
+      cityLinkedForecast.cityIndex,
+      JSON.stringify(cityLinkedForecast)
+    );
+    //Obligé de créer un objet cityToSave car JSON.stringify ne fonctionne pas sur un objet avec des références circulaires (visiblement city a une référence circulaire quelque part dans ses propriétés)
   }
 
   return (
@@ -58,7 +71,13 @@ function App() {
         <div>
           {console.log(isForecastRoute)}
           <button onClick={handleResetCitiesData}>
-            <Link to="/">Revenir l'accueil</Link>
+            {isForecastRoute ? (
+              <Link to={JSON.parse(localStorage.getItem("temporaryCity")).url}>
+                Revenir à la page précédente
+              </Link>
+            ) : (
+              <Link to="/">Revenir l'accueil</Link>
+            )}
           </button>
         </div>
       ) : (
