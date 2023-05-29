@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 const LocalStorageDisplay = () => {
   const citiesSavedOnLocalStorage = [];
   for (let i = 1; i <= localStorage.length; i++) {
-    citiesSavedOnLocalStorage.push(JSON.parse(localStorage.getItem(i)));
+    if (localStorage.getItem(i) !== null) {
+      citiesSavedOnLocalStorage.push(JSON.parse(localStorage.getItem(i)));
+    }
   }
 
   return (
