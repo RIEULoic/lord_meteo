@@ -3,20 +3,27 @@ import { useEffect, useState } from "react";
 const Navbar = ({ handleCitiesData }) => {
   const [accessToken, setAccessToken] = useState("");
   const [searchInput, setsearchInput] = useState("");
+  const [debounceTimer, setDebounceTimer] = useState(null);
 
   useEffect(() => {
     requestNewAccessToken();
   }, []);
 
   useEffect(() => {
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+      //Si searchInput change à nouveau avant que le délai ne soit terminé, l'ancien délai est annulé et un nouveau est créé
+    }
     if (searchInput.length >= 3) {
-      fetchcitiesData();
+      setDebounceTimer(setTimeout(fetchcitiesData, 500));
+      //Cette ligne crée un délai qui déclenche la fonction fetchcitiesData après 500 millisecondes. Si l'utilisateur continue à taper, le délai est annulé et un nouveau délai est créé (voir au dessus)
     } else {
-      /**********À FAIRE **************
-       *  Mettre en place un debouncing pour éviter des requêtes à l'API alors que l'utilisateur n'a pas fini de taper sa recherche.
-       */
       handleCitiesData([]);
     }
+    return () => {
+      //Cette fonction est appelée lorsque le composant est démonté. Elle annule le délai en cours pour éviter que la fonction fetchcitiesData ne soit appelée après le démontage du composant
+      clearTimeout(debounceTimer);
+    };
   }, [searchInput]);
 
   async function requestNewAccessToken() {
