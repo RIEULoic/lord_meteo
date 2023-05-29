@@ -11,9 +11,6 @@ import "./App.css";
 
 function App() {
   const [citiesData, setCitiesData] = useState([]);
-  const [localStorageIndex, setLocalStorageIndex] = useState(
-    localStorage.length
-  );
   const [resetCitiesData, setResetCitiesData] = useState(false);
   const [cityName, setCityName] = useState("");
 
@@ -29,8 +26,9 @@ function App() {
   useEffect(() => {
     //Récupère les données du localStorage
     const storedCitiesData = [];
-    for (let i = 1; i <= 5; i++) {
-      const cityData = localStorage.getItem(i);
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const cityData = localStorage.getItem(key);
       if (cityData) {
         storedCitiesData.push(JSON.parse(cityData));
       }
@@ -53,12 +51,12 @@ function App() {
   function handleForecastButton(cityName, latitude, longitude) {
     setCityName(cityName);
     const cityLinkedForecast = {
-      cityIndex: "temporaryCity",
+      timestamp: "temporaryCity",
       url: `/city/${cityName.toLowerCase().replace(/\s/g, "")}`,
     };
 
     localStorage.setItem(
-      cityLinkedForecast.cityIndex,
+      cityLinkedForecast.timestamp,
       JSON.stringify(cityLinkedForecast)
     );
     //Obligé de créer un objet cityToSave car JSON.stringify ne fonctionne pas sur un objet avec des références circulaires (visiblement city a une référence circulaire quelque part dans ses propriétés)
@@ -89,16 +87,7 @@ function App() {
       )}
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              citiesData={citiesData}
-              localStorageIndex={localStorageIndex}
-              setLocalStorageIndex={setLocalStorageIndex}
-            />
-          }
-        />
+        <Route path="/" element={<Home citiesData={citiesData} />} />
         <Route
           path="city/:citySlug"
           element={

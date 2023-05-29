@@ -1,16 +1,12 @@
 import { Link } from "react-router-dom";
 
-const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
+const Home = ({ citiesData }) => {
   console.log(citiesData);
 
   function handleSaveLocalStorage(cityData) {
     //console.log(city);
     const cityToSave = {
-      cityIndex: (localStorageIndex % 5) + 1,
-      //Le modulo du cul permet que l'index ne dépasse pas 5. Si l'index dépasse 5, on revient à 1.
-
-      //**************À FAIRE ******************//
-      //C'est pas dingue comme methode, à partir de 5 villes, c'est le bordel. Il faudrait plutôt supprimer la ville la plus ancienne du localStorage, donc rajouter une propriété date à cityToSave et comparer les dates des villes du localStorage pour supprimer la plus ancienne.
+      timestamp: Date.now(),
       name: cityData.name,
       geoCode: {
         latitude: cityData.geoCode.latitude,
@@ -19,12 +15,27 @@ const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
       //Je sauvegarde les datas avec la même structure JSON que dans la réponse API
     };
 
-    localStorage.setItem(cityToSave.cityIndex, JSON.stringify(cityToSave));
-    //Obligé de créer un objet cityToSave car JSON.stringify ne fonctionne pas sur un objet avec des références circulaires (visiblement city a une référence circulaire quelque part dans ses propriétés)
+    localStorage.setItem(cityToSave.timestamp, JSON.stringify(cityToSave));
+    //Obligé de créer un objet cityToSave car JSON.stringify ne fonctionne pas sur un objet avec des références circulaires (visiblement cityData a une référence circulaire quelque part dans ses propriétés)
 
-    //setLocalStorageIndex(localStorageIndex + 1);
-    setLocalStorageIndex((prevIndex) => prevIndex + 1);
-    //setLocalStorageIndex((prevIndex) => prevIndex + 1) permet de récupérer la valeur précédente de localStorageIndex et de l'utiliser dans le setLocalStorageIndex. Si on utilise setLocalStorageIndex(localStorageIndex + 1), on récupère la valeur actuelle de localStorageIndex, qui est 0, et on lui ajoute 1. Donc on a toujours 1.
+    // Vérification du nombre de villes enregistrées
+    if (localStorage.length > 5) {
+      let oldestTimestamp = null;
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        //console.log(key);
+        const timestamp = Number(key);
+        //key est une string, je la convertis en number
+
+        // Mise à jour du timestamp le plus ancien
+        if (oldestTimestamp === null || timestamp < oldestTimestamp) {
+          oldestTimestamp = timestamp;
+        }
+      }
+      localStorage.removeItem(String(oldestTimestamp));
+      //String(oldestTimestamp) car localStorage.removeItem fonctionne avec une string et pas avec number
+    }
   }
 
   return (
@@ -35,14 +46,16 @@ const Home = ({ citiesData, localStorageIndex, setLocalStorageIndex }) => {
         {citiesData ? (
           citiesData.map((city) => {
             let cityInLocalStorage = false;
-            for (let i = 1; i <= 5; i++) {
-              const storedCity = JSON.parse(localStorage.getItem(i));
+            for (let i = 0; i < localStorage.length; i++) {
+              const key = localStorage.key(i);
+              const storedCity = JSON.parse(localStorage.getItem(key));
               if (storedCity && storedCity.name === city.name) {
                 cityInLocalStorage = true;
                 //Si la ville est déjà dans le localStorage(cityInLocalStorage = true), on ne l'affiche pas (return cityInLocalStorage ? null : (<button......</button>))
               }
             }
             return cityInLocalStorage ||
+              !city.geoCode ||
               !city.geoCode.latitude ||
               !city.geoCode.longitude ? null : (
               <button

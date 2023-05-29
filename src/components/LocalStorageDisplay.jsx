@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 
 const LocalStorageDisplay = () => {
   const citiesSavedOnLocalStorage = [];
-  for (let i = 1; i <= localStorage.length; i++) {
-    if (localStorage.getItem(i) !== null) {
-      citiesSavedOnLocalStorage.push(JSON.parse(localStorage.getItem(i)));
-    }
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    //console.log(key);
+    citiesSavedOnLocalStorage.push(JSON.parse(localStorage.getItem(key)));
+    console.log(citiesSavedOnLocalStorage);
   }
 
   return (
@@ -13,9 +14,9 @@ const LocalStorageDisplay = () => {
       <h1>Précédentes recherches : </h1>
       <div>
         {citiesSavedOnLocalStorage.map((city) => {
-          console.log(city.cityIndex);
+          console.log(city.timestamp);
           return (
-            <button key={city.cityIndex}>
+            <button key={city.timestamp}>
               <Link to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}>
                 <h1>{city.name}</h1>
               </Link>
