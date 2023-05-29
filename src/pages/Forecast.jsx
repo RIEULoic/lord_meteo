@@ -30,7 +30,10 @@ const Forecast = ({ city }) => {
       <h1>{city}</h1>
       {data.hourly && data.daily ? (
         daySlug ? (
-          <h1>Meteo à J + {daySlug}</h1>
+          <div>
+            <h1>Meteo à J + {daySlug}</h1>
+            <h3>Température : {data.daily[daySlug].temp.day} °</h3>
+          </div>
         ) : (
           <div>
             <h2>{data.hourly[0].humidity} ° d'humiditée</h2>
