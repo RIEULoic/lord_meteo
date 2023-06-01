@@ -1,0 +1,25 @@
+.classicButton {
+  color: rgb(141, 255, 48);
+  font-size: 14px;
+  line-height: 14px;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: Georgia, serif;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  background-image: linear-gradient(to right, rgb(13, 163, 164) 0%, rgb(35, 136, 203) 50%, rgb(89, 57, 117) 100%);
+  box-shadow: rgba(0, 0, 0, 0.73) 2px 8px 8px 3px;
+  border: 2px solid rgb(28, 110, 164);
+  display: inline-block;
+}
+
+.classicButton:hover {
+  background: #0DA3A4;
+}
+
+.classicButton:active {
+  background: #593975;
+}

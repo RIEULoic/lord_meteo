@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import CityPage from "./pages/CityPage";
 import LocalStorageDisplay from "./components/LocalStorageDisplay";
 import Forecast from "./pages/Forecast";
+import Button from "./components/Button";
 
 import "./App.css";
 
@@ -68,7 +69,7 @@ function App() {
       {isCityRoute ? (
         <div>
           {console.log(isForecastRoute)}
-          <button onClick={handleResetCitiesData}>
+          <Button onClick={handleResetCitiesData}>
             {isForecastRoute ? (
               <Link to={JSON.parse(localStorage.getItem("temporaryCity")).url}>
                 Revenir à la page précédente
@@ -76,7 +77,7 @@ function App() {
             ) : (
               <Link to="/">Revenir l'accueil</Link>
             )}
-          </button>
+          </Button>
         </div>
       ) : (
         <>

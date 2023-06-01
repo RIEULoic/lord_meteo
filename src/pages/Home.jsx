@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Button from "../components/Button";
 
 const Home = ({ citiesData }) => {
   console.log(citiesData);
@@ -51,14 +52,14 @@ const Home = ({ citiesData }) => {
               const storedCity = JSON.parse(localStorage.getItem(key));
               if (storedCity && storedCity.name === city.name) {
                 cityInLocalStorage = true;
-                //Si la ville est déjà dans le localStorage(cityInLocalStorage = true), on ne l'affiche pas (return cityInLocalStorage ? null : (<button......</button>))
+                //Si la ville est déjà dans le localStorage(cityInLocalStorage = true), on ne l'affiche pas (return cityInLocalStorage ? null : (<Button......</Button>))
               }
             }
             return cityInLocalStorage ||
               !city.geoCode ||
               !city.geoCode.latitude ||
               !city.geoCode.longitude ? null : (
-              <button
+              <Button
                 key={
                   city.geoCode?.latitude !== undefined ||
                   city.geoCode?.longitude !== undefined
@@ -75,7 +76,7 @@ const Home = ({ citiesData }) => {
                 >
                   {city.name}
                 </Link>
-              </button>
+              </Button>
             );
           })
         ) : (

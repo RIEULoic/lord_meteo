@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 const LocalStorageDisplay = () => {
   const citiesSavedOnLocalStorage = [];
@@ -16,11 +17,11 @@ const LocalStorageDisplay = () => {
         {citiesSavedOnLocalStorage.map((city) => {
           console.log(city.timestamp);
           return (
-            <button key={city.timestamp}>
+            <Button key={city.timestamp}>
               <Link to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}>
                 <h1>{city.name}</h1>
               </Link>
-            </button>
+            </Button>
           );
         })}
       </div>

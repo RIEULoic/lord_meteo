@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Button from "../components/Button";
 
 const CityPage = ({ citiesData, handleForecastButton }) => {
   const { citySlug, forecastSlug } = useParams();
@@ -64,7 +65,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
               alt={weatherData.current.weather[0].description}
             />
             <h2>Temperature : {weatherData.current.temp} ° Celsius</h2>
-            <button
+            <Button
               onClick={() =>
                 handleForecastButton(
                   currentCity.name,
@@ -83,7 +84,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
               >
                 Prévisions de la journée
               </Link>
-            </button>
+            </Button>
           </div>
 
           <div>_____________________________________</div>
@@ -103,7 +104,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
                   <h4>min : {day.temp.min} °</h4>
                   <h4>max : {day.temp.max} °</h4>
                 </div>
-                <button
+                <Button
                   onClick={() =>
                     handleForecastButton(
                       currentCity.name,
@@ -123,7 +124,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
                   >
                     Plus d'infos sur la journée
                   </Link>
-                </button>
+                </Button>
               </div>
             ))
           }
