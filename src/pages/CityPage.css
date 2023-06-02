@@ -68,3 +68,15 @@
 .forecastCityInfoCard h3 {
   margin: 1vh auto;
 }
+
+
+/*Responsive viteuf*/
+@media screen and (max-width: 544px) {
+  .cityInfo {
+    margin: 1rem 3rem;
+    
+  } 
+  .cityCurrentMeteo {
+    margin: 1rem 3rem;
+  }
+}

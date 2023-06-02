@@ -1,12 +1,12 @@
 .home {
   width: 90%;
   background-color: rgba(0, 255, 255, 0);
-  margin: 5%;
+  margin: 0 auto;
 }
 
 .cityButtons {
-  margin:15% 20%;
-  height: 400px;
+  margin-top: 5%;
+  height:30vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
