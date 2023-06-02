@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import "./LocalStorageDisplay.css";
 
 const LocalStorageDisplay = () => {
   const citiesSavedOnLocalStorage = [];
@@ -12,19 +13,24 @@ const LocalStorageDisplay = () => {
 
   return (
     <>
-      <h1>Précédentes recherches : </h1>
-      <div>
-        {citiesSavedOnLocalStorage.map((city) => {
-          console.log(city.timestamp);
-          return (
-            <Button key={city.timestamp}>
-              <Link to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}>
-                <h1>{city.name}</h1>
+      {citiesSavedOnLocalStorage.length > 0 ? (
+        <div>
+          <h1 id="title">Précédentes recherches</h1>
+          {citiesSavedOnLocalStorage.map((city) => {
+            console.log(city.timestamp);
+            return (
+              <Link
+                key={city.timestamp}
+                to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}
+              >
+                <Button>
+                  <h1>{city.name}</h1>
+                </Button>
               </Link>
-            </Button>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      ) : null}
     </>
   );
 };

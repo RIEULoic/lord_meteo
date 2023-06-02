@@ -1,25 +1,37 @@
 .classicButton {
-  color: rgb(141, 255, 48);
-  font-size: 14px;
-  line-height: 14px;
-  padding: 8px;
-  border-radius: 10px;
-  font-family: Georgia, serif;
-  font-weight: normal;
+  
+border: none;
+    color: rgb(16, 4, 15);
+    font-size: 1.2rem;
+    line-height: 15px;
+    margin:15px;
+    padding: 10px 25px;
+    border-radius: 14px;
+    
+    background: rgba(255, 255, 255, 0);
+    box-shadow: rgba(151, 48, 255, 0.763) 0px 0px 13px 6px;
+    text-shadow: 2px 2px 2px rgb(255, 255, 255);
+    
+    display: inline-block;
+    cursor: pointer
+  }
+
+  .classicButton:hover {
+    text-shadow: 5px 5px 5px rgba(210, 8, 8, 0.735);
+  }
+
+  .classicButton:active {
+    /* background: #673A6C; */
+  }
+ 
+
+
+
+:link {
+  color:black;
   text-decoration: none;
-  font-style: normal;
-  font-variant: normal;
-  text-transform: none;
-  background-image: linear-gradient(to right, rgb(13, 163, 164) 0%, rgb(35, 136, 203) 50%, rgb(89, 57, 117) 100%);
-  box-shadow: rgba(0, 0, 0, 0.73) 2px 8px 8px 3px;
-  border: 2px solid rgb(28, 110, 164);
-  display: inline-block;
 }
 
-.classicButton:hover {
-  background: #0DA3A4;
-}
-
-.classicButton:active {
-  background: #593975;
+:visited {
+  color:black
 }

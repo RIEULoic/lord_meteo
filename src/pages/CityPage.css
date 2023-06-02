@@ -1,0 +1,70 @@
+.cityPage {
+  /* border: 5px solid rgb(223, 6, 6); */
+}
+
+.cityInfo {
+  /* border: 5px solid rgb(53, 6, 223); */
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+  letter-spacing: 3px;
+  background-color: rgba(0, 0, 0, 0.339);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  margin: 2vh 15vh;
+  padding: 10px;
+}
+
+.cityInfo h1 {
+  padding-top: 1vh;
+}
+
+.cityCurrentMeteo {
+  margin:auto 15vh;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.339);
+  border-radius: 10px;
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+}
+
+.cityCurrentMeteo h2 {
+  margin: 1vh auto;
+}
+
+#cityInfo {
+  display: flex;
+  justify-content: center;
+
+}
+
+#cityInfo h3 {
+  margin: 1vh 2vh;
+}
+
+#titleForecastCityInfo {
+  /* border: 5px solid rgb(223, 6, 6); */
+  text-align: center;
+  margin: 3vh auto;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+}
+
+.forecastCityInfo {
+  /* border: 5px solid rgb(205, 223, 6); */
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  
+}
+
+.forecastCityInfoCard {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.339);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+}
+
+.forecastCityInfoCard h3 {
+  margin: 1vh auto;
+}

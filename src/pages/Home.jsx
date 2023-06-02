@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 
+import "./Home.css";
+
 const Home = ({ citiesData }) => {
   console.log(citiesData);
 
@@ -40,9 +42,8 @@ const Home = ({ citiesData }) => {
   }
 
   return (
-    <div>
-      <h1>Home</h1>
-      <div>
+    <div className="home">
+      <div className="cityButton">
         {console.log(citiesData)}
         {citiesData ? (
           citiesData.map((city) => {
@@ -59,24 +60,22 @@ const Home = ({ citiesData }) => {
               !city.geoCode ||
               !city.geoCode.latitude ||
               !city.geoCode.longitude ? null : (
-              <Button
-                key={
-                  city.geoCode?.latitude !== undefined ||
-                  city.geoCode?.longitude !== undefined
-                    ? `${city.geoCode.latitude} ${
-                        city.geoCode.longitude
-                      } ${Math.random()}`
-                    : `${Math.random()}`
-                }
-                onClick={() => handleSaveLocalStorage(city)}
-                //Si tu écris onClick={handleSaveLocalStorage(city)}, la fonction s'exécute tout le temps
-              >
-                <Link
-                  to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}
+              <Link to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}>
+                <Button
+                  key={
+                    city.geoCode?.latitude !== undefined ||
+                    city.geoCode?.longitude !== undefined
+                      ? `${city.geoCode.latitude} ${
+                          city.geoCode.longitude
+                        } ${Math.random()}`
+                      : `${Math.random()}`
+                  }
+                  onClick={() => handleSaveLocalStorage(city)}
+                  //Si tu écris onClick={handleSaveLocalStorage(city)}, la fonction s'exécute tout le temps
                 >
-                  {city.name}
-                </Link>
-              </Button>
+                  {city.name} {city.address.countryCode}
+                </Button>
+              </Link>
             );
           })
         ) : (

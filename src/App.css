@@ -1,2 +1,37 @@
+@font-face {
+  font-family: 'metal';
+  src: url('./assets/fonts/MetalMania-Regular.ttf');
+}
 
+@font-face {
+  font-family: "josefin";
+  src: url("./assets/fonts/JosefinSans-Regular.ttf");
+}
 
+.App {
+  font-family: "josefin", sans-serif;
+  text-align: center;
+  background-image: url('./assets/images/homeBG.jpg');
+  min-height: 100vh;
+  /*vh = viewport height en %. 100vh = 100%. Prend la hauteur de tout le viewport */
+  background-size: cover;
+}
+
+.titleApp {
+  margin-bottom: 5vh;
+  padding-top: 10vh;
+  letter-spacing: 20px;
+  text-align: center;
+  font-size: 5rem;
+  /*rem est une unité relative à la taille de la police de base du document. Par defaut, c'est 16px je crois. 2rem = h1 je crois aussi*/
+  text-shadow: 5px 5px 5px rgba(210, 8, 8, 0.735);
+  font-family: 'metal', sans-serif;
+}
+
+#backPage { 
+  margin-bottom: 5vh;
+}
+
+#backHome{
+  margin-bottom: 13vh;
+}

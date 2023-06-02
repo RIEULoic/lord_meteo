@@ -2,6 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 
+import "./CityPage.css";
+
 const CityPage = ({ citiesData, handleForecastButton }) => {
   const { citySlug, forecastSlug } = useParams();
   const [currentCity, setCurrentCity] = useState(null);
@@ -51,12 +53,15 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
   return (
     <div>
       {currentCity && currentCity.geoCode && weatherData.current ? (
-        <div>
-          <h1>City: {currentCity.name}</h1>
-          <h2>Latitude : {currentCity.geoCode.latitude}</h2>
-          <h2>Longitude : {currentCity.geoCode.longitude}</h2>
-          <div>_____________________________________</div>
-          <div>
+        <div className="cityPage">
+          <div className="cityInfo">
+            <h1>{currentCity.name}</h1>
+            <div id="cityInfo">
+              <h3>Latitude : {currentCity.geoCode.latitude}</h3>
+              <h3>Longitude : {currentCity.geoCode.longitude}</h3>
+            </div>
+          </div>
+          <div className="cityCurrentMeteo">
             <h1>Météo en ce moment :</h1>
             <h2>{currentDate}</h2>
             <h2>Temps : {weatherData.current.weather[0].description}</h2>
@@ -65,69 +70,69 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
               alt={weatherData.current.weather[0].description}
             />
             <h2>Temperature : {weatherData.current.temp} ° Celsius</h2>
-            <Button
-              onClick={() =>
-                handleForecastButton(
-                  currentCity.name,
-                  currentCity.geoCode.latitude,
-                  currentCity.geoCode.longitude
-                )
-              }
+            <Link
+              to={`/city/${currentCity.name
+                .toLowerCase()
+                .replace(/\s/g, "")}/forecast/${currentCity.geoCode.latitude}+${
+                currentCity.geoCode.longitude
+              }`}
             >
-              {console.log(weatherData.current.temp)}
-              <Link
-                to={`/city/${currentCity.name
-                  .toLowerCase()
-                  .replace(/\s/g, "")}/forecast/${
-                  currentCity.geoCode.latitude
-                }_${currentCity.geoCode.longitude}`}
+              <Button
+                onClick={() =>
+                  handleForecastButton(
+                    currentCity.name,
+                    currentCity.geoCode.latitude,
+                    currentCity.geoCode.longitude
+                  )
+                }
               >
                 Prévisions de la journée
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
-
-          <div>_____________________________________</div>
-          <h1>Prévisions météo pour les 5 prochains jours :</h1>
-          {
-            //slice permet de selectionner les  5 jours suivants et ensuite on map sur ces 5 jours
-            weatherData.daily.slice(1, 6).map((day, index) => (
-              <div key={index}>
-                <h3>
-                  J + {index + 1} : {day.weather[0].description}
-                </h3>
-                <img
-                  src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
-                  alt={day.weather[0].description}
-                />
-                <div>
-                  <h4>min : {day.temp.min} °</h4>
-                  <h4>max : {day.temp.max} °</h4>
-                </div>
-                <Button
-                  onClick={() =>
-                    handleForecastButton(
-                      currentCity.name,
-                      currentCity.geoCode.latitude,
-                      currentCity.geoCode.longitude
-                    )
-                  }
-                >
-                  {console.log(weatherData.current.temp)}
+          <h1 id="titleForecastCityInfo">
+            Prévisions météo pour les 5 prochains jours :
+          </h1>
+          <div className="forecastCityInfo">
+            {
+              //slice permet de selectionner les  5 jours suivants et ensuite on map sur ces 5 jours
+              weatherData.daily.slice(1, 6).map((day, index) => (
+                <div key={index} className="forecastCityInfoCard">
+                  <h3>
+                    J + {index + 1} : {day.weather[0].description}
+                  </h3>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                    alt={day.weather[0].description}
+                  />
+                  <div>
+                    <h3>min : {day.temp.min} °</h3>
+                    <h3>max : {day.temp.max} °</h3>
+                  </div>
                   <Link
                     city={currentCity.name}
                     to={`/city/${currentCity.name
                       .toLowerCase()
                       .replace(/\s/g, "")}/forecast/${
                       currentCity.geoCode.latitude
-                    }_${currentCity.geoCode.longitude}/${index + 1}`}
+                    }+${currentCity.geoCode.longitude}/${index + 1}`}
                   >
-                    Plus d'infos sur la journée
+                    <Button
+                      onClick={() =>
+                        handleForecastButton(
+                          currentCity.name,
+                          currentCity.geoCode.latitude,
+                          currentCity.geoCode.longitude
+                        )
+                      }
+                    >
+                      Plus d'infos sur la journée
+                    </Button>
                   </Link>
-                </Button>
-              </div>
-            ))
-          }
+                </div>
+              ))
+            }
+          </div>
         </div>
       ) : (
         <div>Chargement...</div>

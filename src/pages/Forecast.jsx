@@ -10,9 +10,9 @@ const Forecast = ({ city }) => {
   }, [forecastSlug]);
 
   async function fetchOpenWeatherMapForecast() {
-    let cityLatitude = forecastSlug.split("_")[0].slice(0, -1);
+    let cityLatitude = forecastSlug.split("+")[0].slice(0, -1);
     console.log(cityLatitude);
-    let cityLongitude = forecastSlug.split("_")[1];
+    let cityLongitude = forecastSlug.split("+")[1];
     console.log(cityLongitude);
     try {
       const response = await fetch(

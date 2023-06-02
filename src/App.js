@@ -54,6 +54,11 @@ function App() {
     const cityLinkedForecast = {
       timestamp: "temporaryCity",
       url: `/city/${cityName.toLowerCase().replace(/\s/g, "")}`,
+      name: cityName,
+      geoCode: {
+        latitude: latitude,
+        longitude: longitude,
+      },
     };
 
     localStorage.setItem(
@@ -65,25 +70,31 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Lord Meteo</h1>
+      <h1 className="titleApp">Lord Meteo</h1>
       {isCityRoute ? (
         <div>
-          {console.log(isForecastRoute)}
-          <Button onClick={handleResetCitiesData}>
-            {isForecastRoute ? (
+          {isForecastRoute ? (
+            <div id="backPage">
               <Link to={JSON.parse(localStorage.getItem("temporaryCity")).url}>
-                Revenir à la page précédente
+                <Button onClick={handleResetCitiesData}>
+                  Revenir à la page précédente
+                </Button>
               </Link>
-            ) : (
-              <Link to="/">Revenir l'accueil</Link>
-            )}
-          </Button>
+            </div>
+          ) : (
+            <div id="backHome">
+              <Link to="/">
+                <Button onClick={handleResetCitiesData}>
+                  Revenir l'accueil
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       ) : (
         <>
           <Navbar handleCitiesData={handleCitiesData} />
           <LocalStorageDisplay />
-          <div>________________________________</div>
         </>
       )}
 

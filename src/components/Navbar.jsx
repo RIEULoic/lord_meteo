@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import "./Navbar.css";
+
 const Navbar = ({ handleCitiesData }) => {
   const [accessToken, setAccessToken] = useState("");
   const [searchInput, setsearchInput] = useState("");
@@ -95,8 +97,9 @@ const Navbar = ({ handleCitiesData }) => {
 
   return (
     <nav className="navbar">
-      <div className="search-bar">
+      <div>
         <input
+          id="search-bar"
           type="text"
           placeholder="Chercher une ville"
           onChange={handleInputChange}
