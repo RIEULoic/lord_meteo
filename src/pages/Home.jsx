@@ -43,7 +43,7 @@ const Home = ({ citiesData }) => {
 
   return (
     <div className="home">
-      <div className="cityButton">
+      <div className="cityButtons">
         {console.log(citiesData)}
         {citiesData ? (
           citiesData.map((city) => {
@@ -63,7 +63,7 @@ const Home = ({ citiesData }) => {
               <Link to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}>
                 <Button
                   key={
-                    city.geoCode?.latitude !== undefined ||
+                    city.geoCode?.latitude !== undefined &&
                     city.geoCode?.longitude !== undefined
                       ? `${city.geoCode.latitude} ${
                           city.geoCode.longitude

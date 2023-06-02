@@ -16,19 +16,22 @@ const LocalStorageDisplay = () => {
       {citiesSavedOnLocalStorage.length > 0 ? (
         <div>
           <h1 id="title">Précédentes recherches</h1>
-          {citiesSavedOnLocalStorage.map((city) => {
-            console.log(city.timestamp);
-            return (
-              <Link
-                key={city.timestamp}
-                to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}
-              >
-                <Button>
-                  <h1>{city.name}</h1>
-                </Button>
-              </Link>
-            );
-          })}
+          {citiesSavedOnLocalStorage
+            .sort((a, b) => a.timestamp - b.timestamp)
+            //.sort((a, b) => b.timestamp - a.timestamp) me permet de trier les villes de la plus récente à la plus ancienne avant de .map dessus. Sinon, elles sont affichées dans je sais pas quel ordre
+            .map((city) => {
+              console.log(city.timestamp);
+              return (
+                <Link
+                  key={city.timestamp}
+                  to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}
+                >
+                  <Button>
+                    <h1>{city.name}</h1>
+                  </Button>
+                </Link>
+              );
+            })}
         </div>
       ) : null}
     </>
