@@ -65,7 +65,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
             <h2>{currentDate}</h2>
             <h2>Temps : {weatherData.current.weather[0].description}</h2>
             <img
-              src={`https:openweathermap.org/img/wn/${weatherData.current.weather[0].icon}.png`}
+              src={`https:openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`}
               alt={weatherData.current.weather[0].description}
             />
             <h2>Temperature : {weatherData.current.temp} ° Celsius</h2>

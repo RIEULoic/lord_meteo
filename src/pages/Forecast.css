@@ -1,0 +1,50 @@
+.forecastContainer {display: flex;
+flex-direction: column;}
+
+.cityWeatherInfo {display: flex;
+flex-direction: column;
+text-shadow: 2px 2px 2px rgb(255, 255, 255);
+  letter-spacing: 3px;
+  background-color: rgba(0, 0, 0, 0.339);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  margin: 2vh 15vh;
+  padding: 10px;}
+
+.cityWeatherInfo * {margin: 1vh 0;}
+
+.meteo {
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+  letter-spacing: 3px;
+  background-color: rgba(0, 0, 0, 0.339);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  margin: 2vh 15vh;
+  padding: 10px;}
+
+  .meteo * {margin: 1vh 0;}
+
+.cityName {
+  text-shadow: 5px 5px 5px rgba(210, 8, 8, 0.735);
+  letter-spacing: 3px;
+  font-size: 3rem}
+
+#nextHours {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#nextHours h1 {
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+    letter-spacing: 3px;
+}
+
+#chart {
+background-color: rgba(0, 0, 0, 0.59);
+border-radius: 20px;
+/* border: solid 2px rgb(223, 5, 5); */
+padding: 25px 0 5px 0;
+margin: 20px 0 20px 0;
+}

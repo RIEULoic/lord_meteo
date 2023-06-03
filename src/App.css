@@ -22,7 +22,7 @@
   padding-top: 10vh;
   letter-spacing: 20px;
   text-align: center;
-  font-size: 5rem;
+  font-size: 6rem;
   /*rem est une unité relative à la taille de la police de base du document. Par defaut, c'est 16px je crois. 2rem = h1 je crois aussi*/
   text-shadow: 5px 5px 5px rgba(210, 8, 8, 0.735);
   font-family: 'metal', sans-serif;
