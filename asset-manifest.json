@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/lord_meteo/static/css/main.f0995de4.css",
+    "main.js": "/lord_meteo/static/js/main.125ea97b.js",
+    "static/media/homeBG.jpg": "/lord_meteo/static/media/homeBG.927c7e60d38847f07bba.jpg",
+    "static/media/MetalMania-Regular.ttf": "/lord_meteo/static/media/MetalMania-Regular.f82691735ebc2e392921.ttf",
+    "static/media/JosefinSans-Regular.ttf": "/lord_meteo/static/media/JosefinSans-Regular.c978665c44b59cf9c71f.ttf",
+    "index.html": "/lord_meteo/index.html",
+    "main.f0995de4.css.map": "/lord_meteo/static/css/main.f0995de4.css.map",
+    "main.125ea97b.js.map": "/lord_meteo/static/js/main.125ea97b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f0995de4.css",
+    "static/js/main.125ea97b.js"
+  ]
+}
