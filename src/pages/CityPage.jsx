@@ -9,7 +9,6 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
   const [currentCity, setCurrentCity] = useState(null);
   const [weatherData, setWeatherData] = useState("");
   const [currentDate, setCurrentDate] = useState("");
-  let date = "";
 
   useEffect(() => {
     console.log(citiesData);
@@ -38,7 +37,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
       const data = await response.json();
       console.log(data);
 
-      date = new Date(data.current.dt * 1000);
+      let date = new Date(data.current.dt * 1000);
       //Cette ligne de code permet de convertir le timestamp en date (ex: 1620735450 => 08/30/2021 )
       //console.log(new Intl.DateTimeFormat("fr-FR").format(date));
       setCurrentDate(new Intl.DateTimeFormat("fr-FR").format(date));
@@ -76,6 +75,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
                 .replace(/\s/g, "")}/forecast/${currentCity.geoCode.latitude}+${
                 currentCity.geoCode.longitude
               }`}
+              currentDate={currentDate}
             >
               <Button
                 onClick={() =>
@@ -86,7 +86,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
                   )
                 }
               >
-                Prévisions de la journée
+                Prévisions du jour
               </Button>
             </Link>
           </div>
@@ -126,7 +126,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
                         )
                       }
                     >
-                      Plus d'infos sur la journée
+                      Plus d'infos
                     </Button>
                   </Link>
                 </div>
