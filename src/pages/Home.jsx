@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import "./Home.css";
 
 const Home = ({ citiesData }) => {
-  console.log(citiesData);
+  //console.log(citiesData);
 
   function handleSaveLocalStorage(cityData) {
     //console.log(city);
@@ -44,7 +44,6 @@ const Home = ({ citiesData }) => {
   return (
     <div className="home">
       <div className="cityButtons">
-        {console.log(citiesData)}
         {citiesData ? (
           citiesData.map((city) => {
             let cityInLocalStorage = false;
@@ -60,16 +59,18 @@ const Home = ({ citiesData }) => {
               !city.geoCode ||
               !city.geoCode.latitude ||
               !city.geoCode.longitude ? null : (
-              <Link to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}>
+              <Link
+                to={`/city/${city.name.toLowerCase().replace(/\s/g, "")}`}
+                key={
+                  city.geoCode?.latitude !== undefined &&
+                  city.geoCode?.longitude !== undefined
+                    ? `${city.geoCode.latitude} ${
+                        city.geoCode.longitude
+                      } ${Math.random()}`
+                    : `${Math.random()}`
+                }
+              >
                 <Button
-                  key={
-                    city.geoCode?.latitude !== undefined &&
-                    city.geoCode?.longitude !== undefined
-                      ? `${city.geoCode.latitude} ${
-                          city.geoCode.longitude
-                        } ${Math.random()}`
-                      : `${Math.random()}`
-                  }
                   onClick={() => handleSaveLocalStorage(city)}
                   //Si tu écris onClick={handleSaveLocalStorage(city)}, la fonction s'exécute tout le temps
                 >

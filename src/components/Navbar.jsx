@@ -70,9 +70,9 @@ const Navbar = ({ handleCitiesData }) => {
       );
       const responseBody = await response.json();
       if (responseBody.data) {
-        responseBody.data.forEach((city) => {
-          console.log(city.name);
-        });
+        // responseBody.data.forEach((city) => {
+        //   console.log(city.name);
+        // });
         handleCitiesData(responseBody.data);
 
         // console.log("Villes trouvées " + data.data[0].name);

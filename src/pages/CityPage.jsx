@@ -11,7 +11,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
   const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
-    console.log(citiesData);
+    // console.log(citiesData);
     //console.log(forecastSlug);
     const city = citiesData.find(
       (city) =>
@@ -20,7 +20,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
         !city.geoCode.longitude === false
     );
     setCurrentCity(city);
-    console.log(city);
+    //console.log(city);
   }, [citySlug, forecastSlug]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
         `https://api.openweathermap.org/data/3.0/onecall?lat=${currentCity.geoCode.latitude}&lon=${currentCity.geoCode.longitude}&appid=${process.env.REACT_APP_OWM_KEY}&units=metric&lang=fr`
       );
       const data = await response.json();
-      console.log(data);
+      //  console.log(data);
 
       let date = new Date(data.current.dt * 1000);
       //Cette ligne de code permet de convertir le timestamp en date (ex: 1620735450 => 08/30/2021 )
@@ -75,7 +75,6 @@ const CityPage = ({ citiesData, handleForecastButton }) => {
                 .replace(/\s/g, "")}/forecast/${currentCity.geoCode.latitude}+${
                 currentCity.geoCode.longitude
               }`}
-              currentDate={currentDate}
             >
               <Button
                 onClick={() =>

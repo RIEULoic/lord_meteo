@@ -15,7 +15,7 @@ function App() {
   const [resetCitiesData, setResetCitiesData] = useState(false);
   const [cityName, setCityName] = useState("");
 
-  console.log(`citiesData : ${JSON.stringify(citiesData, null, 2)}`);
+  //console.log(`citiesData : ${JSON.stringify(citiesData, null, 2)}`);
   //console.log(`citiesData : ${citiesData}`);
 
   const location = useLocation();

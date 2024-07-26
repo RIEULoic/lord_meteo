@@ -8,7 +8,7 @@ const LocalStorageDisplay = () => {
     const key = localStorage.key(i);
     //console.log(key);
     citiesSavedOnLocalStorage.push(JSON.parse(localStorage.getItem(key)));
-    console.log(citiesSavedOnLocalStorage);
+    //console.log(citiesSavedOnLocalStorage);
   }
 
   return (
@@ -20,7 +20,7 @@ const LocalStorageDisplay = () => {
             .sort((a, b) => a.timestamp - b.timestamp)
             //.sort((a, b) => b.timestamp - a.timestamp) me permet de trier les villes de la plus récente à la plus ancienne avant de .map dessus. Sinon, elles sont affichées dans je sais pas quel ordre
             .map((city) => {
-              console.log(city.timestamp);
+              //console.log(city.timestamp);
               return (
                 <Link
                   key={city.timestamp}
